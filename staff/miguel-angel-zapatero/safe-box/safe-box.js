@@ -11,6 +11,25 @@
  * @returns {*} the secret if the password is correct.  
  */
 
-function safeBox(password, secretOrNewPassword, changePassword) {
-    //TODO
+function box() {
+    var __password = '123';
+    var __secret;
+
+    function safeBox(password, secretOrNewPassword, changePassword) {
+        if (password === __password) {
+            if(arguments.length === 1 && password !== 'undefined') {
+                return __secret;
+            } else if(arguments.length === 2) {
+                __secret = secretOrNewPassword;
+                return true;  
+            } else if(arguments.length === 3 && changePassword) {
+                __password = secretOrNewPassword;
+                return true;
+            }
+        } else throw TypeError('password wrong'); 
+    }
+
+    return safeBox;
 }
+
+var blackBox = box(); // Mejor hacer una selfy para ejecutar directamente la función box --> var blackBox = (function(){})();
